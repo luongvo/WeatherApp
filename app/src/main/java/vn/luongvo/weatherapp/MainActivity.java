@@ -1,13 +1,29 @@
 package vn.luongvo.weatherapp;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import org.androidannotations.annotations.BindingObject;
+import org.androidannotations.annotations.DataBound;
+import org.androidannotations.annotations.EActivity;
 
-public class MainActivity extends AppCompatActivity {
+import vn.luongvo.weatherapp.databinding.ActivityMainBinding;
+import vn.luongvo.weatherapp.ui.base.BaseActivity;
+
+/**
+ * Created by luongvo on 8/7/18.
+ */
+@DataBound
+@EActivity(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
+
+    @BindingObject
+    ActivityMainBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void afterInject() {
+
+    }
+
+    @Override
+    public void afterView() {
+
     }
 }
