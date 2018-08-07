@@ -1,21 +1,49 @@
 apply plugin: 'com.android.application'
+apply from: '../buildvariants.gradle'
 
 android {
     compileSdkVersion TARGET_SDK
     defaultConfig {
-        applicationId "vn.luongvo.weatherapp"
         minSdkVersion MIN_SDK
         targetSdkVersion TARGET_SDK
         versionCode VERSION_CODE
-        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "resourcePackageName": "vn.luongvo.weatherapp",
+                ]
+            }
+        }
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        weatherapp {
+            dimension 'app'
+            applicationId "vn.luongvo.weatherapp"
+            versionName VERSION_NAME + "." + VERSION_CODE
+        }
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    applicationVariants.all { variant ->
+        generateBuildConfigVariables(variant)
+        appendVersionNameVersionCode(variant)
     }
 
     dataBinding {
@@ -33,6 +61,14 @@ dependencies {
 
     api "com.google.dagger:dagger:$DAGGER_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    api("com.squareup.retrofit2:retrofit:$RETROFIT_VERSION") {
+        exclude module: 'okhttp'
+    }
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    api "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    implementation "com.google.code.gson:gson:$GSON_VERSION"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
