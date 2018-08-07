@@ -7,7 +7,9 @@ ext {
     MIN_SDK = 15
     TARGET_SDK = 27
 
+    SUPPORT_LIB = "27.1.1"
     AA_VERSION = "4.4.0"
+    DAGGER_VERSION = "2.11"
 }
 
 buildscript {
