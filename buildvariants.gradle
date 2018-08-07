@@ -8,6 +8,7 @@ def generateBuildConfigVariables(variant) {
             def buildTypePostfix = variant.buildType.name == "debug" ? "_DEBUG" : ""
             variant.buildConfigField "String", "HOST_API", "\"" + props['HOST_API' + buildTypePostfix] + "\""
             variant.buildConfigField "String", "HOST_NAME", "\"" + props['HOST_NAME' + buildTypePostfix] + "\""
+            variant.buildConfigField "String", "API_KEY", "\"" + props['API_KEY' + buildTypePostfix] + "\""
         }
     } else {
         println "Missing app properties file"

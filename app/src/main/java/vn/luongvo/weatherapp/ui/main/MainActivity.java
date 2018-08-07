@@ -12,7 +12,7 @@ import vn.luongvo.weatherapp.databinding.ActivityMainBinding;
 import vn.luongvo.weatherapp.ui.base.BaseActivity;
 
 /**
- * Created by luongvo on 5/14/18.
+ * Created by luongvo on 8/7/18.
  */
 @DataBound
 @EActivity(R.layout.activity_main)

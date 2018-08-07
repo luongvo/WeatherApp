@@ -1,6 +1,11 @@
 package vn.luongvo.weatherapp.modules;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
+import dagger.Provides;
+import vn.luongvo.weatherapp.ui.main.MainContact;
+import vn.luongvo.weatherapp.ui.main.MainInteractor;
 
 /**
  * Modules aren't used by you directly, they're used by Dagger. @Provides annotated methods are
@@ -12,4 +17,9 @@ import dagger.Module;
 @Module
 public class InteractorModule {
 
+    @Provides
+    @Singleton
+    static MainContact.Interactor providesMain() {
+        return new MainInteractor();
+    }
 }

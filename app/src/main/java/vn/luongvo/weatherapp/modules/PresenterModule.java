@@ -20,7 +20,7 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    static MainContact.Presenter providesMain() {
-        return new MainPresenter();
+    static MainContact.Presenter providesMain(MainContact.Interactor interactor) {
+        return new MainPresenter(interactor);
     }
 }

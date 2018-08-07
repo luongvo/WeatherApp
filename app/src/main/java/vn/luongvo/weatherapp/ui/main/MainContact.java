@@ -2,11 +2,11 @@ package vn.luongvo.weatherapp.ui.main;
 
 import android.support.annotation.NonNull;
 
+import vn.luongvo.weatherapp.services.api.OnAPIListener;
 import vn.luongvo.weatherapp.ui.base.BaseActivityContract;
 
-
 /**
- * Created by luongvo on 5/15/18.
+ * Created by luongvo on 8/7/18.
  */
 public interface MainContact {
 
@@ -21,5 +21,7 @@ public interface MainContact {
     }
 
     interface Interactor extends BaseActivityContract.Interactor {
+
+        void getCurrentWeather(@NonNull String cityName, @NonNull OnAPIListener<String> listener);
     }
 }
