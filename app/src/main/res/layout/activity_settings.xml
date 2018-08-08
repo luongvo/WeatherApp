@@ -6,12 +6,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_content">
+        android:background="@color/bg_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/content_padding">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/enter_city_name" />
+
+            <Button
+                android:id="@+id/bt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_forecast"
+            android:id="@+id/rv_city"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:scrollbars="vertical" />
 
     </LinearLayout>

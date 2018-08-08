@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="city"
+            type="vn.luongvo.weatherapp.dto.City" />
+
+        <variable
+            name="listener"
+            type="vn.luongvo.weatherapp.ui.settings.SettingsContact.ActionListener" />
+    </data>
+
+    <FrameLayout
+        style="@style/SelectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onItemClicked(city)}"
+        android:orientation="vertical"
+        android:padding="@dimen/content_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{city.name + ", " + city.sys.country}'
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_main"
+            tools:text="Ha noi, VN" />
+
+    </FrameLayout>
+
+</layout>

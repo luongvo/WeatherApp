@@ -3,6 +3,7 @@ package vn.luongvo.weatherapp.services.api;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import vn.luongvo.weatherapp.dto.CityResult;
 import vn.luongvo.weatherapp.dto.Forecast;
 import vn.luongvo.weatherapp.dto.WeatherInfo;
 
@@ -20,5 +21,12 @@ public interface AppAPI {
     Call<Forecast> getForecast3hrs(@Query("id") long cityId,
                                    @Query("units") String units,
                                    @Query("appid") String appId);
+
+    @GET("find")
+    Call<CityResult> findCity(@Query("q") String cityName,
+                              @Query("type") String type,
+                              @Query("sort") String sort,
+                              @Query("cnt") int cnt,
+                              @Query("appid") String appId);
 }
 

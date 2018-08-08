@@ -12,4 +12,7 @@
     <string name="wind_">Wind: %d km/h</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+
+    <string name="enter_city_name">Enter city name</string>
+    <string name="search">Search</string>
 </resources>

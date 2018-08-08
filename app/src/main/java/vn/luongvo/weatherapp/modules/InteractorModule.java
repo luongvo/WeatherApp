@@ -6,6 +6,8 @@ import dagger.Module;
 import dagger.Provides;
 import vn.luongvo.weatherapp.ui.main.MainContact;
 import vn.luongvo.weatherapp.ui.main.MainInteractor;
+import vn.luongvo.weatherapp.ui.settings.SettingsContact;
+import vn.luongvo.weatherapp.ui.settings.SettingsInteractor;
 
 /**
  * Modules aren't used by you directly, they're used by Dagger. @Provides annotated methods are
@@ -21,5 +23,11 @@ public class InteractorModule {
     @Singleton
     static MainContact.Interactor providesMain() {
         return new MainInteractor();
+    }
+
+    @Provides
+    @Singleton
+    static SettingsContact.Interactor providesSettings() {
+        return new SettingsInteractor();
     }
 }

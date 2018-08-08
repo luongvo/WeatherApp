@@ -36,7 +36,7 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    static SettingsContact.Presenter providesSettings() {
-        return new SettingsPresenter();
+    static SettingsContact.Presenter providesSettings(SettingsContact.Interactor interactor) {
+        return new SettingsPresenter(interactor);
     }
 }
