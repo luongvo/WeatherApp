@@ -1,7 +1,11 @@
 package vn.luongvo.weatherapp.ui.detail;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import org.androidannotations.annotations.BindingObject;
@@ -32,6 +36,8 @@ public class DetailActivity extends BaseActivity implements DetailContact.View {
     @Extra
     WeatherInfo weatherInfo;
 
+    private ShareActionProvider shareActionProvider;
+
     @Override
     public void afterInject() {
         ((App) getApplication()).getComponent().inject(this);
@@ -59,5 +65,35 @@ public class DetailActivity extends BaseActivity implements DetailContact.View {
             finish();
         }
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareIntent(weatherInfo);
+
+        return true;
+    }
+
+    private void setShareIntent(@NonNull WeatherInfo weatherInfo) {
+        if (shareActionProvider != null) {
+            String content = weatherInfo.getDayOfWeek() + "\n" +
+                    weatherInfo.getDateStr() + "\n" +
+                    getString(R.string._celsius, Math.round(weatherInfo.getMain().getTempMax())) + "\n" +
+                    getString(R.string._celsius, Math.round(weatherInfo.getMain().getTempMin())) + "\n" +
+                    weatherInfo.getWeathers().get(0).getMain() + "\n" +
+                    getString(R.string.humidity_, Math.round(weatherInfo.getMain().getHumidity())) + "\n" +
+                    getString(R.string.pressure_, Math.round(weatherInfo.getMain().getPressure())) + "\n" +
+                    getString(R.string.wind_, Math.round(weatherInfo.getWind().getSpeedKmh())) + "\n";
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, content);
+
+            shareActionProvider.setShareIntent(intent);
+        }
     }
 }
