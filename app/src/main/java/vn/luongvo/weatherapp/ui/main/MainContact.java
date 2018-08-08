@@ -2,6 +2,8 @@ package vn.luongvo.weatherapp.ui.main;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import vn.luongvo.weatherapp.dto.Forecast;
 import vn.luongvo.weatherapp.dto.WeatherInfo;
 import vn.luongvo.weatherapp.services.api.OnAPIListener;
@@ -14,7 +16,9 @@ public interface MainContact {
 
     interface View extends BaseActivityContract.View {
 
-        void initUI();
+        void initUI(List<WeatherInfo> forecasts);
+
+        void refreshForecastList();
     }
 
     interface Presenter extends BaseActivityContract.Presenter {
@@ -29,5 +33,10 @@ public interface MainContact {
         void getCurrentWeather(long cityId, @NonNull OnAPIListener<WeatherInfo> listener);
 
         void getForecasts(long cityId, int forecastDays, @NonNull OnAPIListener<Forecast> listener);
+    }
+
+    interface ActionListener {
+
+        void onItemClicked(@NonNull WeatherInfo weatherInfo);
     }
 }

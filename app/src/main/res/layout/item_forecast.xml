@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="weatherInfo"
+            type="vn.luongvo.weatherapp.dto.WeatherInfo" />
+
+        <variable
+            name="listener"
+            type="vn.luongvo.weatherapp.ui.main.MainContact.ActionListener" />
+    </data>
+
+    <LinearLayout
+        style="@style/SelectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onItemClicked(weatherInfo)}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{weatherInfo.weathers.get(0).main}" />
+
+    </LinearLayout>
+
+</layout>

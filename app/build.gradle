@@ -59,6 +59,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIB"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     api "org.androidannotations:androidannotations-api:$AA_VERSION"

@@ -16,4 +16,7 @@ public interface OnAPIListener<T> {
 
     default void onServerFailure() {
     }
+
+    default void onCallFinished() {
+    }
 }

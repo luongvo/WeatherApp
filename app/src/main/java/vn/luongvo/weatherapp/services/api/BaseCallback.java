@@ -34,6 +34,7 @@ public class BaseCallback<T> implements Callback<T> {
         } else if (listener != null) {
             if (response.isSuccessful()) {
                 listener.onSuccess(response.body());
+                listener.onCallFinished();
             } else {
                 // try to parse ErrorResponse
                 ErrorResponse errorResponse = null;
@@ -52,6 +53,7 @@ public class BaseCallback<T> implements Callback<T> {
                 }
 
                 listener.onFailure(response.code(), errorResponse);
+                listener.onCallFinished();
             }
         }
     }
@@ -64,6 +66,7 @@ public class BaseCallback<T> implements Callback<T> {
             LogUtil.e(TAG, t.getMessage());
             if (listener != null) {
                 listener.onServerFailure();
+                listener.onCallFinished();
             }
         }
     }
