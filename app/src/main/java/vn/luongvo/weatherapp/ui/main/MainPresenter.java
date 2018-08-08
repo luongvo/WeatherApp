@@ -1,13 +1,19 @@
 package vn.luongvo.weatherapp.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.luongvo.weatherapp.dto.City;
 import vn.luongvo.weatherapp.dto.Forecast;
 import vn.luongvo.weatherapp.dto.WeatherInfo;
+import vn.luongvo.weatherapp.services.api.GsonConverterBuilder;
 import vn.luongvo.weatherapp.services.api.OnAPIListener;
 import vn.luongvo.weatherapp.services.api.dto.ErrorResponse;
 import vn.luongvo.weatherapp.ui.base.BasePresenter;
@@ -36,13 +42,29 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
         this.view = view;
         view.initUI(forecasts);
 
-        // TODO
-        executeGetCurrentWeather(1581130);
+        loadSelectedCity();
+    }
+
+    @Override
+    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MainContact.View.REQUEST_SETTINGS && resultCode == Activity.RESULT_OK) {
+            loadSelectedCity();
+        }
     }
 
     @Override
     public void onItemClicked(@NonNull WeatherInfo weatherInfo) {
         view.openDetailScreen(weatherInfo);
+    }
+
+    private void loadSelectedCity() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        City city = GsonConverterBuilder.build().fromJson(sp.getString("city", ""), City.class);
+        if (city == null) {
+            view.openSettingsScreen();
+        } else {
+            executeGetCurrentWeather(city.getId());
+        }
     }
 
     private void executeGetCurrentWeather(long cityId) {
@@ -57,8 +79,8 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
             @Override
             public void onCallFinished() {
                 view.dismissLoadingDialog();
-                // TODO
-                executeGetForecasts(1581130);
+
+                executeGetForecasts(cityId);
             }
         });
     }

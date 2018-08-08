@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.ui.settings;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface SettingsContact {
 
     interface Presenter extends BaseActivityContract.Presenter {
 
-        void onCreate(@NonNull View view);
+        void onCreate(@NonNull View view, @NonNull Context context);
 
         void searchCity(String searchStr);
     }

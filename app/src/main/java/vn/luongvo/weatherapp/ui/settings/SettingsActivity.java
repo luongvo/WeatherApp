@@ -41,7 +41,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContact.Vi
 
     @Override
     public void afterView() {
-        presenter.onCreate(this);
+        presenter.onCreate(this, this);
     }
 
     @Override

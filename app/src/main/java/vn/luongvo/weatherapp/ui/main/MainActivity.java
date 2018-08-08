@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.ui.main;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,6 +75,12 @@ public class MainActivity extends BaseActivity implements MainContact.View {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.handleActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void updateCurrentWeather(@NonNull WeatherInfo weatherInfo) {
         binding.setWeatherInfo(weatherInfo);
         binding.setListener((MainContact.ActionListener) presenter);
@@ -91,6 +98,6 @@ public class MainActivity extends BaseActivity implements MainContact.View {
 
     @Override
     public void openSettingsScreen() {
-        SettingsActivity_.intent(this).start();
+        SettingsActivity_.intent(this).startForResult(REQUEST_SETTINGS);
     }
 }
