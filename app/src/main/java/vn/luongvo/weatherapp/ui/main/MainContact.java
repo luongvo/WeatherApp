@@ -18,6 +18,8 @@ public interface MainContact {
 
         void initUI(@NonNull List<WeatherInfo> forecasts);
 
+        void updateCurrentWeather(@NonNull WeatherInfo weatherInfo);
+
         void refreshForecastList();
 
         void openDetailScreen(@NonNull WeatherInfo weatherInfo);

@@ -1,6 +1,7 @@
 package vn.luongvo.weatherapp.ui.main;
 
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +48,11 @@ public class MainActivity extends BaseActivity implements MainContact.View {
 
     @Override
     public void initUI(@NonNull List<WeatherInfo> forecasts) {
+        // setup transparent toolbar for setting menu
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("");
+
         adapter = new ForecastAdapter(forecasts, (MainContact.ActionListener) presenter);
         binding.rvForecast.setAdapter(adapter);
         binding.rvForecast.setHasFixedSize(true);
@@ -65,6 +71,12 @@ public class MainActivity extends BaseActivity implements MainContact.View {
             openSettingsScreen();
         }
         return true;
+    }
+
+    @Override
+    public void updateCurrentWeather(@NonNull WeatherInfo weatherInfo) {
+        binding.setWeatherInfo(weatherInfo);
+        binding.setListener((MainContact.ActionListener) presenter);
     }
 
     @Override

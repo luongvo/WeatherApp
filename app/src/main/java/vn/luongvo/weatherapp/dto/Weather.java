@@ -67,16 +67,20 @@ public class Weather implements Parcelable {
     @BindingAdapter("bind:weather_icon")
     public static void bindWeatherIcon(ImageView imageView, Weather weather) {
         Context context = imageView.getContext();
-        String resName = "ic_" + weather.getMain().toLowerCase().replace(" ", "_");
-        int resId = context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
-        imageView.setImageResource(resId);
+        if (weather != null) {
+            String resName = "ic_" + weather.getMain().toLowerCase().replace(" ", "_");
+            int resId = context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+            imageView.setImageResource(resId);
+        }
     }
 
     @BindingAdapter("bind:weather_art")
     public static void bindWeatherArt(ImageView imageView, Weather weather) {
         Context context = imageView.getContext();
-        String resName = "art_" + weather.getMain().toLowerCase().replace(" ", "_");
-        int resId = context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
-        imageView.setImageResource(resId);
+        if (weather != null) {
+            String resName = "art_" + weather.getMain().toLowerCase().replace(" ", "_");
+            int resId = context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+            imageView.setImageResource(resId);
+        }
     }
 }

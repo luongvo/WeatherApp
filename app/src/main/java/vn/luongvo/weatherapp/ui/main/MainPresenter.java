@@ -11,7 +11,6 @@ import vn.luongvo.weatherapp.services.api.OnAPIListener;
 import vn.luongvo.weatherapp.services.api.dto.ErrorResponse;
 import vn.luongvo.weatherapp.ui.base.BasePresenter;
 import vn.luongvo.weatherapp.utils.CollectionUtils;
-import vn.luongvo.weatherapp.utils.LogUtil;
 
 /**
  * Created by luongvo on 8/7/18.
@@ -47,7 +46,7 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
         interactor.getCurrentWeather(cityId, new OnAPIListener<WeatherInfo>() {
             @Override
             public void onSuccess(WeatherInfo result) {
-                LogUtil.d(TAG, result.toString());
+                view.updateCurrentWeather(result);
             }
         });
     }
