@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Converter;
 import retrofit2.Response;
-import vn.luongvo.weatherapp.dto.ErrorResponse;
+import vn.luongvo.weatherapp.services.api.dto.ErrorResponse;
 import vn.luongvo.weatherapp.utils.LogUtil;
 
 /**

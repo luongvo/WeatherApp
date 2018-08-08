@@ -2,7 +2,7 @@ package vn.luongvo.weatherapp.services.api;
 
 import android.support.annotation.NonNull;
 
-import vn.luongvo.weatherapp.dto.ErrorResponse;
+import vn.luongvo.weatherapp.services.api.dto.ErrorResponse;
 
 /**
  * Created by luongvo on 8/7/18.
