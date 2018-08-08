@@ -21,6 +21,8 @@ public interface MainContact {
         void refreshForecastList();
 
         void openDetailScreen(@NonNull WeatherInfo weatherInfo);
+
+        void openSettingsScreen();
     }
 
     interface Presenter extends BaseActivityContract.Presenter {

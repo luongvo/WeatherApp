@@ -2,6 +2,8 @@ package vn.luongvo.weatherapp.ui.main;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import org.androidannotations.annotations.BindingObject;
 import org.androidannotations.annotations.DataBound;
@@ -17,6 +19,7 @@ import vn.luongvo.weatherapp.databinding.ActivityMainBinding;
 import vn.luongvo.weatherapp.dto.WeatherInfo;
 import vn.luongvo.weatherapp.ui.base.BaseActivity;
 import vn.luongvo.weatherapp.ui.detail.DetailActivity_;
+import vn.luongvo.weatherapp.ui.settings.SettingsActivity_;
 
 /**
  * Created by luongvo on 8/7/18.
@@ -51,6 +54,20 @@ public class MainActivity extends BaseActivity implements MainContact.View {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            openSettingsScreen();
+        }
+        return true;
+    }
+
+    @Override
     public void refreshForecastList() {
         adapter.notifyDataSetChanged();
     }
@@ -58,5 +75,10 @@ public class MainActivity extends BaseActivity implements MainContact.View {
     @Override
     public void openDetailScreen(@NonNull WeatherInfo weatherInfo) {
         DetailActivity_.intent(this).weatherInfo(weatherInfo).start();
+    }
+
+    @Override
+    public void openSettingsScreen() {
+        SettingsActivity_.intent(this).start();
     }
 }

@@ -11,6 +11,7 @@ import vn.luongvo.weatherapp.modules.InteractorModule;
 import vn.luongvo.weatherapp.modules.PresenterModule;
 import vn.luongvo.weatherapp.ui.detail.DetailActivity;
 import vn.luongvo.weatherapp.ui.main.MainActivity;
+import vn.luongvo.weatherapp.ui.settings.SettingsActivity;
 
 /**
  * Created by luongvo on 8/7/18.
@@ -42,5 +43,7 @@ public class App extends Application {
         void inject(MainActivity activity);
 
         void inject(DetailActivity activity);
+
+        void inject(SettingsActivity activity);
     }
 }
