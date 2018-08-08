@@ -18,15 +18,15 @@ public class MainInteractor implements MainContact.Interactor {
     public void getCurrentWeather(long cityId, @NonNull OnAPIListener<WeatherInfo> listener) {
         BaseCallback<WeatherInfo> callback = new BaseCallback<>(listener);
 
-        APIService.getInstance().getApi().getCurrentWeather(cityId, BuildConfig.API_KEY)
+        APIService.getInstance().getApi().getCurrentWeather(cityId, UNITS, BuildConfig.API_KEY)
                 .enqueue(callback);
     }
 
     @Override
-    public void getForecasts(long cityId, int forecastDays, @NonNull OnAPIListener<Forecast> listener) {
+    public void getForecasts3hrs(long cityId, @NonNull OnAPIListener<Forecast> listener) {
         BaseCallback<Forecast> callback = new BaseCallback<>(listener);
 
-        APIService.getInstance().getApi().getForecast(cityId, forecastDays, BuildConfig.API_KEY)
+        APIService.getInstance().getApi().getForecast3hrs(cityId, UNITS, BuildConfig.API_KEY)
                 .enqueue(callback);
     }
 }

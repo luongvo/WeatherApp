@@ -54,12 +54,22 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
 
     private void executeGetForecasts(long cityId) {
         view.showLoadingDialog();
-        interactor.getForecasts(cityId, FORECAST_DAY_NUM, new OnAPIListener<Forecast>() {
+        interactor.getForecasts3hrs(cityId, new OnAPIListener<Forecast>() {
             @Override
             public void onSuccess(Forecast result) {
                 forecasts.clear();
                 if (!CollectionUtils.isEmpty(result.getList())) {
-                    forecasts.addAll(result.getList());
+                    int i = 0;
+                    while (i < result.getList().size()) {
+                        forecasts.add(result.getList().get(i));
+                        /*
+                         FIXME
+                         we can not use https://openweathermap.org/forecast16 as free plan
+                         use https://openweathermap.org/forecast5 instead
+                         just get first forecast and ignores the rest of the day
+                          */
+                        i += 8;
+                    }
                 }
                 view.refreshForecastList();
             }

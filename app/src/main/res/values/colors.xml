@@ -6,4 +6,7 @@
 
     <color name="bg_content">#eeeeee</color>
     <color name="ripple_color">#c9c9c9</color>
+
+    <color name="text_main">#2c2c2c</color>
+    <color name="text_body">#646464</color>
 </resources>

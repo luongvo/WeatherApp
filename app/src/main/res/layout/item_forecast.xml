@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,17 +14,63 @@
             type="vn.luongvo.weatherapp.ui.main.MainContact.ActionListener" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         style="@style/SelectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> listener.onItemClicked(weatherInfo)}">
+        android:onClick="@{() -> listener.onItemClicked(weatherInfo)}"
+        android:orientation="vertical"
+        android:padding="@dimen/content_padding">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/content_padding"
+            app:weather_icon="@{weatherInfo.weathers.get(0)}"
+            tools:src="@drawable/ic_clear" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_icon"
+            android:text="@{weatherInfo.dayOfWeek}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_main"
+            tools:text="Tuesday" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{weatherInfo.weathers.get(0).main}" />
+            android:layout_below="@+id/tv_date"
+            android:layout_toEndOf="@+id/iv_icon"
+            android:text="@{weatherInfo.weathers.get(0).main}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_small"
+            tools:text="Clear" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@{@string/_celsius(Math.round(weatherInfo.main.tempMax))}"
+            android:textColor="@color/text_main"
+            android:textSize="@dimen/text_main"
+            tools:text="29" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tv_temp"
+            android:text="@{@string/_celsius(Math.round(weatherInfo.main.tempMin))}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_small"
+            tools:text="13" />
+
+    </RelativeLayout>
 
 </layout>

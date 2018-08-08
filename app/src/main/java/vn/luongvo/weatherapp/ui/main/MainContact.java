@@ -23,16 +23,16 @@ public interface MainContact {
 
     interface Presenter extends BaseActivityContract.Presenter {
 
-        int FORECAST_DAY_NUM = 14;
-
         void onCreate(@NonNull View view);
     }
 
     interface Interactor extends BaseActivityContract.Interactor {
 
+        String UNITS = "metric";
+
         void getCurrentWeather(long cityId, @NonNull OnAPIListener<WeatherInfo> listener);
 
-        void getForecasts(long cityId, int forecastDays, @NonNull OnAPIListener<Forecast> listener);
+        void getForecasts3hrs(long cityId, @NonNull OnAPIListener<Forecast> listener);
     }
 
     interface ActionListener {

@@ -13,11 +13,12 @@ public interface AppAPI {
 
     @GET("weather")
     Call<WeatherInfo> getCurrentWeather(@Query("id") long cityId,
+                                        @Query("units") String units,
                                         @Query("appid") String appId);
 
     @GET("forecast")
-    Call<Forecast> getForecast(@Query("id") long cityId,
-                               @Query("cnt") int cnt,
-                               @Query("appid") String appId);
+    Call<Forecast> getForecast3hrs(@Query("id") long cityId,
+                                   @Query("units") String units,
+                                   @Query("appid") String appId);
 }
 

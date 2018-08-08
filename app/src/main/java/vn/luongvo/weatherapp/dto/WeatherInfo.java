@@ -2,6 +2,7 @@ package vn.luongvo.weatherapp.dto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class WeatherInfo {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getDayOfWeek() {
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        return format.format(date);
     }
 
     public Main getMain() {
