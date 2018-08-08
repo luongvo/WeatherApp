@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.dto;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,12 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import vn.luongvo.weatherapp.R;
 import vn.luongvo.weatherapp.utils.DateUtils;
 
 /**
  * Created by luongvo on 8/9/18.
  */
 public class WeatherInfo implements Parcelable {
+
+    public static final long DAY_IN_MS = 86400000L;
 
     @SerializedName("dt")
     private Date date;
@@ -62,9 +66,16 @@ public class WeatherInfo implements Parcelable {
         return date;
     }
 
-    public String getDayOfWeek() {
-        SimpleDateFormat format = new SimpleDateFormat("EEEE");
-        return format.format(date);
+    public String getDayOfWeek(Context context) {
+        Date now = new Date();
+        long ms = Math.abs(now.getTime() - date.getTime());
+        long elapsedDays = ms / DAY_IN_MS;
+
+        if (elapsedDays <= 0)
+            return context.getString(R.string.today);
+        else if (elapsedDays == 1)
+            return context.getString(R.string.tomorrow);
+        else return new SimpleDateFormat("EEEE").format(date);
     }
 
     public String getDateStr() {

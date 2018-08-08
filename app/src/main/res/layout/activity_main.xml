@@ -53,7 +53,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text='@{weatherInfo.dayOfWeek + ", " + weatherInfo.dateStr}'
+                                android:text='@{weatherInfo.getDayOfWeek(context) + ", " + weatherInfo.dateStr}'
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/text_big"
                                 tools:text="Today, July 18" />

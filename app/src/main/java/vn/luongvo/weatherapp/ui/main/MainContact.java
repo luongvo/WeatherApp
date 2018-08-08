@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.ui.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface MainContact {
 
     interface Presenter extends BaseActivityContract.Presenter {
 
-        void onCreate(@NonNull View view);
+        void onCreate(@NonNull View view, @NonNull Context context);
     }
 
     interface Interactor extends BaseActivityContract.Interactor {

@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements MainContact.View {
 
     @Override
     public void afterView() {
-        presenter.onCreate(this);
+        presenter.onCreate(this, this);
     }
 
     @Override

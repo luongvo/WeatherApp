@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.ui.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -18,9 +19,11 @@ import vn.luongvo.weatherapp.utils.CollectionUtils;
 public class MainPresenter extends BasePresenter implements MainContact.Presenter,
         MainContact.ActionListener {
 
+    private Context context;
     private MainContact.View view;
     private MainContact.Interactor interactor;
 
+    private WeatherInfo todayWeatherInfo;
     private List<WeatherInfo> forecasts = new ArrayList<>();
 
     public MainPresenter(MainContact.Interactor interactor) {
@@ -28,13 +31,13 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
     }
 
     @Override
-    public void onCreate(@NonNull MainContact.View view) {
+    public void onCreate(@NonNull MainContact.View view, @NonNull Context context) {
+        this.context = context;
         this.view = view;
         view.initUI(forecasts);
 
         // TODO
         executeGetCurrentWeather(1581130);
-        executeGetForecasts(1581130);
     }
 
     @Override
@@ -43,10 +46,19 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
     }
 
     private void executeGetCurrentWeather(long cityId) {
+        view.showLoadingDialog();
         interactor.getCurrentWeather(cityId, new OnAPIListener<WeatherInfo>() {
             @Override
             public void onSuccess(WeatherInfo result) {
-                view.updateCurrentWeather(result);
+                todayWeatherInfo = result;
+                view.updateCurrentWeather(todayWeatherInfo);
+            }
+
+            @Override
+            public void onCallFinished() {
+                view.dismissLoadingDialog();
+                // TODO
+                executeGetForecasts(1581130);
             }
         });
     }
@@ -60,7 +72,9 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
                 if (!CollectionUtils.isEmpty(result.getList())) {
                     int i = 0;
                     while (i < result.getList().size()) {
-                        forecasts.add(result.getList().get(i));
+                        // sometimes this api returns today at first
+                        if (!todayWeatherInfo.getDayOfWeek(context).equals(result.getList().get(i).getDayOfWeek(context)))
+                            forecasts.add(result.getList().get(i));
                         /*
                          FIXME
                          we can not use https://openweathermap.org/forecast16 as free plan

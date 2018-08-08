@@ -10,4 +10,6 @@
     <string name="humidity_">Humidity: %d %%</string>
     <string name="pressure_">Pressure: %d hPa</string>
     <string name="wind_">Wind: %d km/h</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

@@ -80,7 +80,7 @@ public class DetailActivity extends BaseActivity implements DetailContact.View {
 
     private void setShareIntent(@NonNull WeatherInfo weatherInfo) {
         if (shareActionProvider != null) {
-            String content = weatherInfo.getDayOfWeek() + "\n" +
+            String content = weatherInfo.getDayOfWeek(this) + "\n" +
                     weatherInfo.getDateStr() + "\n" +
                     getString(R.string._celsius, Math.round(weatherInfo.getMain().getTempMax())) + "\n" +
                     getString(R.string._celsius, Math.round(weatherInfo.getMain().getTempMin())) + "\n" +
