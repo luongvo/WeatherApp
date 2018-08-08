@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import vn.luongvo.weatherapp.ui.detail.DetailContact;
+import vn.luongvo.weatherapp.ui.detail.DetailPresenter;
 import vn.luongvo.weatherapp.ui.main.MainContact;
 import vn.luongvo.weatherapp.ui.main.MainPresenter;
 
@@ -22,5 +24,11 @@ public class PresenterModule {
     @Singleton
     static MainContact.Presenter providesMain(MainContact.Interactor interactor) {
         return new MainPresenter(interactor);
+    }
+
+    @Provides
+    @Singleton
+    static DetailContact.Presenter providesDetail() {
+        return new DetailPresenter();
     }
 }

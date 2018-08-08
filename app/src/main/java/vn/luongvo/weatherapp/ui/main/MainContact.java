@@ -16,9 +16,11 @@ public interface MainContact {
 
     interface View extends BaseActivityContract.View {
 
-        void initUI(List<WeatherInfo> forecasts);
+        void initUI(@NonNull List<WeatherInfo> forecasts);
 
         void refreshForecastList();
+
+        void openDetailScreen(@NonNull WeatherInfo weatherInfo);
     }
 
     interface Presenter extends BaseActivityContract.Presenter {

@@ -40,7 +40,7 @@ public class MainPresenter extends BasePresenter implements MainContact.Presente
 
     @Override
     public void onItemClicked(@NonNull WeatherInfo weatherInfo) {
-        view.showToast("TODO");
+        view.openDetailScreen(weatherInfo);
     }
 
     private void executeGetCurrentWeather(long cityId) {

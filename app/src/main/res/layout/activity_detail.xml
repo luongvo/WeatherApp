@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.MainActivity">
+
+    <data>
+
+        <variable
+            name="weatherInfo"
+            type="vn.luongvo.weatherapp.dto.WeatherInfo" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_content"
+        android:orientation="vertical"
+        android:padding="@dimen/content_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{weatherInfo.dayOfWeek}"
+            android:textColor="@color/text_main"
+            android:textSize="@dimen/text_big"
+            tools:text="Tuesday" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{weatherInfo.dateStr}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_body"
+            tools:text="July 18" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/_celsius(Math.round(weatherInfo.main.tempMax))}"
+                    android:textColor="@color/text_body"
+                    android:textSize="80sp"
+                    tools:text="29" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="@{@string/_celsius(Math.round(weatherInfo.main.tempMin))}"
+                    android:textColor="@color/text_body"
+                    android:textSize="30sp"
+                    tools:text="13" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:weather_art="@{weatherInfo.weathers.get(0)}"
+                    tools:src="@drawable/art_clear" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{weatherInfo.weathers.get(0).main}"
+                    android:textColor="@color/text_body"
+                    android:textSize="@dimen/text_big"
+                    tools:text="Clear" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@{@string/humidity_(Math.round(weatherInfo.main.humidity))}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_big"
+            tools:text="@string/humidity_" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/pressure_(Math.round(weatherInfo.main.pressure))}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_big"
+            tools:text="@string/pressure_" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/wind_(Math.round(weatherInfo.wind.speedKmh))}"
+            android:textColor="@color/text_body"
+            android:textSize="@dimen/text_big"
+            tools:text="@string/wind_" />
+
+    </LinearLayout>
+
+</layout>

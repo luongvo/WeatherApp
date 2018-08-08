@@ -1,5 +1,6 @@
 package vn.luongvo.weatherapp.ui.main;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 
 import org.androidannotations.annotations.BindingObject;
@@ -15,6 +16,7 @@ import vn.luongvo.weatherapp.R;
 import vn.luongvo.weatherapp.databinding.ActivityMainBinding;
 import vn.luongvo.weatherapp.dto.WeatherInfo;
 import vn.luongvo.weatherapp.ui.base.BaseActivity;
+import vn.luongvo.weatherapp.ui.detail.DetailActivity_;
 
 /**
  * Created by luongvo on 8/7/18.
@@ -41,7 +43,7 @@ public class MainActivity extends BaseActivity implements MainContact.View {
     }
 
     @Override
-    public void initUI(List<WeatherInfo> forecasts) {
+    public void initUI(@NonNull List<WeatherInfo> forecasts) {
         adapter = new ForecastAdapter(forecasts, (MainContact.ActionListener) presenter);
         binding.rvForecast.setAdapter(adapter);
         binding.rvForecast.setHasFixedSize(true);
@@ -51,5 +53,10 @@ public class MainActivity extends BaseActivity implements MainContact.View {
     @Override
     public void refreshForecastList() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void openDetailScreen(@NonNull WeatherInfo weatherInfo) {
+        DetailActivity_.intent(this).weatherInfo(weatherInfo).start();
     }
 }

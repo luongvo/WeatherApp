@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import vn.luongvo.weatherapp.modules.InteractorModule;
 import vn.luongvo.weatherapp.modules.PresenterModule;
+import vn.luongvo.weatherapp.ui.detail.DetailActivity;
 import vn.luongvo.weatherapp.ui.main.MainActivity;
 
 /**
@@ -39,5 +40,7 @@ public class App extends Application {
     public interface ApplicationComponent {
 
         void inject(MainActivity activity);
+
+        void inject(DetailActivity activity);
     }
 }
