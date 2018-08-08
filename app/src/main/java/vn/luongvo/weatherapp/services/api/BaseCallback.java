@@ -1,8 +1,13 @@
 package vn.luongvo.weatherapp.services.api;
 
+import java.lang.annotation.Annotation;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
+import vn.luongvo.weatherapp.dto.ErrorResponse;
 import vn.luongvo.weatherapp.utils.LogUtil;
 
 /**
@@ -30,9 +35,23 @@ public class BaseCallback<T> implements Callback<T> {
             if (response.isSuccessful()) {
                 listener.onSuccess(response.body());
             } else {
-                // try to parse ErrorResponse...
+                // try to parse ErrorResponse
+                ErrorResponse errorResponse = null;
+                if (response.errorBody() != null) {
+                    Converter<ResponseBody, ErrorResponse> errorConverter =
+                            APIService.getInstance().getRetrofit()
+                                    .responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    try {
+                        errorResponse = errorConverter.convert(response.errorBody());
+                    } catch (Exception e) {
+                        LogUtil.e(TAG, e.getMessage());
+                    }
+                }
+                if (errorResponse == null) {
+                    errorResponse = new ErrorResponse();
+                }
 
-                listener.onFailure(response.code());
+                listener.onFailure(response.code(), errorResponse);
             }
         }
     }
